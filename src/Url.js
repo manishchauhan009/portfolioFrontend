@@ -1,2 +1,2 @@
-const URL="http://localhost:5000";
+const URL="https://portfoliobackend-oa9m.onrender.com";
 export default URL;

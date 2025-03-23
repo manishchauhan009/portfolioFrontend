@@ -6,20 +6,23 @@ import AddProject from "./components/AddProject";
 import EditProject from "./components/EditProject";
 import Contacts from "./components/Contacts";
 import Login from "./components/Login";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 const Admin = () => {
   return (
     <Routes>
-      {/* Admin Login (No Sidebar) */}
+      {/* Admin Login Route */}
       <Route path="/" element={<Login />} />
 
-      {/* Admin Layout (Sidebar Visible) */}
-      <Route path="/*" element={<AdminLayout />}>
-        <Route path="dashboard" element={<Dashboard />} />
-        <Route path="projects" element={<Projects />} />
-        <Route path="add-project" element={<AddProject />} />
-        <Route path="edit-project/:id" element={<EditProject />} />
-        <Route path="contacts" element={<Contacts />} />
+      {/* Protected Admin Routes */}
+      <Route element={<ProtectedRoute />}>
+        <Route path="/*" element={<AdminLayout />}>
+          <Route path="dashboard" element={<Dashboard />} />
+          <Route path="projects" element={<Projects />} />
+          <Route path="add-project" element={<AddProject />} />
+          <Route path="edit-project/:id" element={<EditProject />} />
+          <Route path="contacts" element={<Contacts />} />
+        </Route>
       </Route>
     </Routes>
   );

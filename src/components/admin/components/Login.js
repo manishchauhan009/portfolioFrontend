@@ -14,18 +14,25 @@ const Login = () => {
     e.preventDefault();
     setError("");
     setLoading(true);
-
+  
     try {
       const response = await axios.post(`${URL}/api/admin/login`, { email, password });
+      console.log("response login",response)
       localStorage.setItem("token", response.data.token);
-      navigate("/admin/dashboard");
+      // localStorage.setItem("role", response.data.role); // Store user role
+  
+      if (response.data.token) {
+        navigate("/admin/dashboard");
+      } else {
+        setError("Unauthorized Access");
+      }
     } catch (err) {
-      console.log("error is ",err)
       setError("Invalid email or password");
     } finally {
       setLoading(false);
     }
   };
+  
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-900">
