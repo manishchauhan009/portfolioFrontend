@@ -3,13 +3,14 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 
 const Projects = () => {
-  const backendURL = process.env.REACT_APP_BACKEND_URL;
+
   const [projects, setProjects] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
 
   // Fetch projects from API
   useEffect(() => {
+    const backendURL = process.env.REACT_APP_BACKEND_URL;
     const fetchProjects = async () => {
       try {
         const response = await axios.get(`${backendURL}/api/projects`);
@@ -26,6 +27,7 @@ const Projects = () => {
 
   // Delete a project
   const deleteProject = async (id) => {
+    const backendURL = process.env.REACT_APP_BACKEND_URL;
     const confirmDelete = window.confirm("Are you sure you want to delete this project?");
     if (!confirmDelete) return;
 

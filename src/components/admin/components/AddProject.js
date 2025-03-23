@@ -2,7 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 
 const AddProject = () => {
-  const backendURL = process.env.REACT_APP_BACKEND_URL;
+
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [image, setImage] = useState("");
@@ -16,6 +16,7 @@ const AddProject = () => {
     setMessage("");
 
     try {
+      const backendURL = process.env.REACT_APP_BACKEND_URL;
       const response = await axios.post(`${backendURL}/api/projects/add`, {
         title,
         description,

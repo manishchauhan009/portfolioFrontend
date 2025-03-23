@@ -2,12 +2,12 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 const Contacts = () => {
-  const backendURL = process.env.REACT_APP_BACKEND_URL;
   const [contacts, setContacts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
+    const backendURL = process.env.REACT_APP_BACKEND_URL;
     const fetchContacts = async () => {
       try {
         const response = await axios.get(`${backendURL}/api/contacts`);

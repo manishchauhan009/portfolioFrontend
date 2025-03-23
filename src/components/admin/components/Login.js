@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const Login = () => {
-  const backendURL = process.env.REACT_APP_BACKEND_URL;
+  
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -16,6 +16,7 @@ const Login = () => {
     setLoading(true);
   
     try {
+      const backendURL = process.env.REACT_APP_BACKEND_URL;
       const response = await axios.post(`${backendURL}/api/admin/login`, { email, password });
       console.log("response login",response)
       localStorage.setItem("token", response.data.token);
