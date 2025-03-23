@@ -2,13 +2,14 @@ import React, { useEffect, useState } from "react";
 import { FiArrowUpRight } from "react-icons/fi";
 
 const Portfolio = () => {
+  const backendURL = process.env.REACT_APP_BACKEND_URL;
   const [projects, setProjects] = useState([]);
 
   useEffect(() => {
     // Simulating fetching data from a backend API
     const fetchProjects = async () => {
       try {
-        const response = await fetch("http://localhost:5000/api/projects");
+        const response = await fetch(`${backendURL}/api/projects`);
         const data = await response.json();
         setProjects(data);
       } catch (error) {

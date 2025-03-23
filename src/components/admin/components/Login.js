@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import URL from "../../../Url";
 
 const Login = () => {
+  const backendURL = process.env.REACT_APP_BACKEND_URL;
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -16,7 +16,7 @@ const Login = () => {
     setLoading(true);
   
     try {
-      const response = await axios.post(`${URL}/api/admin/login`, { email, password });
+      const response = await axios.post(`${backendURL}/api/admin/login`, { email, password });
       console.log("response login",response)
       localStorage.setItem("token", response.data.token);
       // localStorage.setItem("role", response.data.role); // Store user role

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 const Contacts = () => {
+  const backendURL = process.env.REACT_APP_BACKEND_URL;
   const [contacts, setContacts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -9,7 +10,7 @@ const Contacts = () => {
   useEffect(() => {
     const fetchContacts = async () => {
       try {
-        const response = await axios.get("http://localhost:5000/api/contacts");
+        const response = await axios.get(`${backendURL}/api/contacts`);
         setContacts(response.data);
       } catch (err) {
         setError("Failed to fetch contacts. Please try again.");

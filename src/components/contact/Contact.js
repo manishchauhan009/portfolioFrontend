@@ -3,6 +3,7 @@ import axios from "axios";
 import emailjs from "@emailjs/browser";
 
 const Contact = () => {
+  const backendURL = process.env.REACT_APP_BACKEND_URL;
   const formRef = useRef(null);
   const [formState, setFormState] = useState({
     user_name: "",
@@ -58,7 +59,7 @@ const Contact = () => {
 
     try {
       // Send data to backend
-      await axios.post("http://localhost:5000/api/contacts/submit", formState);
+      await axios.post(`${backendURL}/api/contacts/submit`, formState);
 
       // Send email via EmailJS
       await emailjs.sendForm(
