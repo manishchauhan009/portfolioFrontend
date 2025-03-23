@@ -18,7 +18,6 @@ const Login = () => {
     try {
       const backendURL = process.env.REACT_APP_BACKEND_URL;
       const response = await axios.post(`${backendURL}/api/admin/login`, { email, password });
-      console.log("response login",response)
       localStorage.setItem("token", response.data.token);
       // localStorage.setItem("role", response.data.role); // Store user role
   
