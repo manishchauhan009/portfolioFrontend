@@ -3,7 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const EditProject = () => {
-  const backendURL = process.env.REACT_APP_BACKEND_URL;
+  
   const { id } = useParams(); // Get project ID from URL
   const navigate = useNavigate();
 
@@ -15,6 +15,7 @@ const EditProject = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
+    const backendURL = process.env.REACT_APP_BACKEND_URL;
     const fetchProject = async () => {
       try {
         const response = await axios.get(`${backendURL}/api/projects/${id}`);
@@ -33,6 +34,7 @@ const EditProject = () => {
   }, [id]);
 
   const updateProject = async (e) => {
+    const backendURL = process.env.REACT_APP_BACKEND_URL;
     e.preventDefault();
 
     try {
