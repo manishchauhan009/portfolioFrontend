@@ -12,12 +12,12 @@ const AddProject = () => {
   const uploadImage = async (file) => {
     const formData = new FormData();
     formData.append("file", file);
-    formData.append("upload_preset", "your_upload_preset"); // ✅ Correct key
+    formData.append("upload_preset", "portfolio"); // ✅ Correct key
 
 
     try {
       const response = await axios.post(
-        `https://api.cloudinary.com/v1_1/portfolio/image/upload`,
+        `https://api.cloudinary.com/v1_1/dninyy2on/image/upload`,
         formData
       );
       return response.data.secure_url;
