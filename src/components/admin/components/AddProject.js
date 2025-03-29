@@ -2,13 +2,30 @@ import { useState } from "react";
 import axios from "axios";
 
 const AddProject = () => {
-
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [image, setImage] = useState("");
+  const [image, setImage] = useState(null);
   const [link, setLink] = useState("");
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
+
+  const uploadImage = async (file) => {
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("upload_preset", "your_upload_preset"); // ✅ Correct key
+
+
+    try {
+      const response = await axios.post(
+        `https://api.cloudinary.com/v1_1/portfolio/image/upload`,
+        formData
+      );
+      return response.data.secure_url;
+    } catch (error) {
+      console.error("Image upload failed", error);
+      return null;
+    }
+  };
 
   const addProject = async (e) => {
     e.preventDefault();
@@ -16,11 +33,21 @@ const AddProject = () => {
     setMessage("");
 
     try {
+      let imageUrl = "";
+      if (image) {
+        imageUrl = await uploadImage(image);
+        if (!imageUrl) {
+          setMessage("❌ Image upload failed. Please try again.");
+          setLoading(false);
+          return;
+        }
+      }
+
       const backendURL = process.env.REACT_APP_BACKEND_URL;
       const response = await axios.post(`${backendURL}/api/projects/add`, {
         title,
         description,
-        image,
+        image: imageUrl,
         link,
       });
 
@@ -28,7 +55,7 @@ const AddProject = () => {
         setMessage("🎉 Project added successfully!");
         setTitle("");
         setDescription("");
-        setImage("");
+        setImage(null);
         setLink("");
       }
     } catch (error) {
@@ -40,7 +67,7 @@ const AddProject = () => {
 
   return (
     <div className="p-6 max-w-lg mx-auto bg-white rounded-lg shadow-lg mt-20">
-  <h2 className="text-2xl font-semibold mb-4">Add New Project</h2>
+      <h2 className="text-2xl font-semibold mb-4">Add New Project</h2>
 
       {message && <p className="mb-4 text-center font-medium">{message}</p>}
 
@@ -62,10 +89,9 @@ const AddProject = () => {
           required
         />
         <input
-          type="text"
-          placeholder="Image URL"
-          value={image}
-          onChange={(e) => setImage(e.target.value)}
+          type="file"
+          accept="image/*"
+          onChange={(e) => setImage(e.target.files[0])}
           className="w-full p-2 border rounded"
           required
         />
