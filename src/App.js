@@ -14,7 +14,7 @@ const App = () => {
   return (
     <>
       <HeaderPage />
-      <main >
+      <main className="mt-[80px">
         <Routes>
           {/* Main Website Routes */}
           <Route path="/" element={<HomePage />} />
@@ -24,6 +24,7 @@ const App = () => {
           <Route path="/contact" element={<ContactPage />} />
 
           {/* Admin Panel Routes */}
+      
           <Route path="/admin/*" element={<Admin />} />
         </Routes>
       </main>

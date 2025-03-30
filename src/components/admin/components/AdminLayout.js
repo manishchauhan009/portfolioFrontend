@@ -17,23 +17,22 @@ const AdminLayout = () => {
   };
 
   return (
-    <div className="relative min-h-screen ">
-      {/* Fixed Admin Header */}
-      <AdminHeader toggleSidebar={toggleSidebar} sidebarOpen={sidebarOpen} />
-
-      {/* Main Content Area: using margin-top to offset header */}
-      <div className="flex flex-1 ">
-        {/* Sidebar (slides in on mobile, fixed on desktop) */}
-        <div
-          id="sidebar"
-          className={`fixed lg:relative  left-0 h-full w-56 bg-gray-900 text-white shadow-lg transition-transform duration-300 z-20
+    <div className="flex h-screen w-full overflow-hidden ">
+      {/* Sidebar (fixed on mobile, always visible on large screens) */}
+      <div
+        className={`fixed lg:relative left-0 h-full pt-16 w-56 bg-gray-900 text-white shadow-lg transition-transform duration-300 z-50
           ${sidebarOpen ? "translate-x-0" : "-translate-x-full"} lg:translate-x-0`}
-        >
-          <Sidebar toggleSidebar={toggleSidebar} />
-        </div>
+      >
+        <Sidebar toggleSidebar={toggleSidebar} />
+      </div>
 
-        {/* Main Content */}
-        <div className={`flex-1 transition-all duration-300 ${sidebarOpen ? "ml-56" : "ml-0 lg:ml-56"}`}>
+      {/* Main Content Section */}
+      <div className="flex flex-col flex-1 h-screen w-full pt-16">
+        {/* Fixed Admin Header */}
+        <AdminHeader toggleSidebar={toggleSidebar} sidebarOpen={sidebarOpen} />
+
+        {/* Main Content - No extra margin/padding */}
+        <div className="flex-1 w-full overflow-auto">
           <Outlet />
         </div>
       </div>
