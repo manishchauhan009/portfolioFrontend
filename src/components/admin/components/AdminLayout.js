@@ -17,7 +17,7 @@ const AdminLayout = () => {
   };
 
   return (
-    <div className="relative min-h-screen mt-[-0.6rem]">
+    <div className="relative min-h-screen ">
       {/* Fixed Admin Header */}
       <AdminHeader toggleSidebar={toggleSidebar} sidebarOpen={sidebarOpen} />
 
