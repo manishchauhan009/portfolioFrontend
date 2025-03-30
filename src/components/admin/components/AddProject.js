@@ -13,6 +13,7 @@ const AddProject = () => {
     const formData = new FormData();
     formData.append("file", file);
     formData.append("upload_preset", process.env.REACT_APP_CLOUDINARY_UPLOAD_PRESET);
+    formData.append("cloud_name", process.env.REACT_APP_CLOUDINARY_CLOUD_NAME);
 
     try {
       const response = await axios.post(
@@ -65,8 +66,8 @@ const AddProject = () => {
   };
 
   return (
-    <div className="p-6 max-w-lg mx-auto bg-white rounded-lg shadow-lg mt-20">
-      <h2 className="text-2xl font-semibold mb-4">Add New Project</h2>
+    <div className="p-6 mt-20 w-full max-w-screen-lg mx-auto bg-white rounded-lg shadow-lg">
+      <h2 className="text-2xl font-semibold mb-4 text-center">Add New Project</h2>
 
       {message && <p className="mb-4 text-center font-medium">{message}</p>}
 
@@ -76,14 +77,14 @@ const AddProject = () => {
           placeholder="Project Title"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
-          className="w-full p-2 border rounded"
+          className="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-400"
           required
         />
         <textarea
           placeholder="Project Description"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
-          className="w-full p-2 border rounded"
+          className="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-400"
           rows="3"
           required
         />
@@ -99,7 +100,7 @@ const AddProject = () => {
           placeholder="Live Link"
           value={link}
           onChange={(e) => setLink(e.target.value)}
-          className="w-full p-2 border rounded"
+          className="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-400"
           required
         />
 

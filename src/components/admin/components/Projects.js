@@ -1,9 +1,8 @@
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
 const Projects = () => {
-
   const [projects, setProjects] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -40,8 +39,8 @@ const Projects = () => {
   };
 
   return (
-    <div className="p-6 md:p-10 mt-20 max-w-5xl mx-auto">
-      {/* 🏷️ Page Header */}
+    <div className="p-6 md:p-10  max-w-5xl mx-auto">
+      {/* Page Header */}
       <div className="flex flex-col md:flex-row justify-between items-center mb-6">
         <h2 className="text-3xl font-semibold text-gray-900">Manage Projects</h2>
         <Link
@@ -52,10 +51,8 @@ const Projects = () => {
         </Link>
       </div>
 
-      {/* ⚠️ Error Message */}
       {error && <p className="text-red-500 text-lg">{error}</p>}
 
-      {/* ⏳ Loading State */}
       {loading ? (
         <div className="flex justify-center items-center py-10">
           <span className="text-gray-600 text-lg animate-pulse">Loading projects...</span>
@@ -69,13 +66,35 @@ const Projects = () => {
               key={project._id}
               className="bg-white shadow-lg rounded-lg p-5 border border-gray-200 flex flex-col justify-between transition hover:shadow-xl"
             >
-              {/* 📌 Project Title */}
-              <h3 className="text-xl font-semibold text-gray-800 mb-3">{project.title}</h3>
+              {/* Project Image (if available) */}
+              {project.image && (
+                <img
+                  src={project.image}
+                  alt={project.title}
+                  className="w-full h-40 object-cover rounded mb-4"
+                />
+              )}
 
-              {/* 🛠️ Action Buttons */}
-              <div className="flex justify-between items-center mt-auto">
+              {/* Project Details */}
+              <div className="flex-1">
+                <h3 className="text-xl font-semibold text-gray-800 mb-2">{project.title}</h3>
+                <p className="text-gray-600 text-sm mb-2">{project.description}</p>
+                {project.link && (
+                  <a
+                    href={project.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-blue-500 text-sm hover:underline"
+                  >
+                    Live Demo
+                  </a>
+                )}
+              </div>
+
+              {/* Action Buttons */}
+              <div className="flex justify-between items-center mt-4">
                 <Link
-                  to={`/edit-project/${project._id}`}
+                  to={`/admin/edit-project/${project._id}`}
                   className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition-all shadow-md"
                 >
                   Edit

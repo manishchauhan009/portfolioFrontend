@@ -23,7 +23,7 @@ const Contacts = () => {
   }, []);
 
   return (
-    <div className="p-6 mt-20">
+    <div className="p-6 ">
       <h2 className="text-3xl font-semibold mb-6 text-gray-800 text-center">
         Contacts
       </h2>

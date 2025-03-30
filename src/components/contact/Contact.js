@@ -89,7 +89,7 @@ const Contact = () => {
   };
 
   return (
-    <section className="contact bg-gradient-to-b from-gray-900 to-black py-16 px-6 sm:px-12 md:px-20 mt-8" id="contact">
+    <section className="contact bg-gradient-to-b from-gray-900 to-black py-16 px-6 sm:px-12 md:px-20" id="contact">
       <h2 className="text-4xl sm:text-5xl font-bold text-center text-white mb-10">
         Contact <span className="text-yellow-400 drop-shadow-lg">Me!</span>
       </h2>

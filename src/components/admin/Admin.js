@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import AdminLayout from "./components/AdminLayout";
 import Dashboard from "./components/Dashboard";
 import Projects from "./components/Projects";
@@ -16,7 +16,7 @@ const Admin = () => {
 
       {/* Protected Admin Routes */}
       <Route element={<ProtectedRoute />}>
-        <Route path="/*" element={<AdminLayout />}>
+        <Route path="/" element={<AdminLayout />}>
           <Route path="dashboard" element={<Dashboard />} />
           <Route path="projects" element={<Projects />} />
           <Route path="add-project" element={<AddProject />} />

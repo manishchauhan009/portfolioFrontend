@@ -55,10 +55,8 @@ const Portfolio = () => {
   }, []);
 
   return (
-    <section
-      className="portfolio bg-gradient-to-br from-black via-gray-900 to-black py-20 px-6 sm:px-12 md:px-24 mt-6"
-      id="portfolio"
-    >
+    <section className="portfolio bg-gradient-to-br from-black via-gray-900 to-black py-16 px-6 sm:px-12 md:px-24 mt-0" id="portfolio">
+
       <h2 className="text-4xl sm:text-5xl font-bold text-center text-white mb-16 tracking-wide">
         Latest <span className="text-yellow-400 drop-shadow-lg">Projects</span>
       </h2>
