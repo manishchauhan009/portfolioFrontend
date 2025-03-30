@@ -6,7 +6,7 @@ import AdminHeader from "../admin/components/AdminHeader"; // Make sure this is 
 const HeaderPage = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const location = useLocation();
-  const isAdmin = /^\/admin(\/|$)/.test(location.pathname);
+  const isAdmin = /^\/admin\/.+/.test(location.pathname);
 
   useEffect(() => {
     if (menuOpen) {
