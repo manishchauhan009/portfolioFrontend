@@ -14,7 +14,7 @@ const App = () => {
   return (
     <>
       <HeaderPage />
-      <main className="mt-[80px">
+      <main className="mt-[80px]">
         <Routes>
           {/* Main Website Routes */}
           <Route path="/" element={<HomePage />} />
