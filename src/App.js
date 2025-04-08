@@ -7,6 +7,7 @@ import AboutPage from "./pages/AboutPage";
 import ProjectPage from "./pages/ProjectPage";
 import ContactPage from "./pages/ContactPage";
 import SkillsPage from "./pages/SkillsPage";
+import ExperiencePage from "./pages/ExperiencePage";
 import Admin from "./components/admin/Admin";
 import "./App.css";
 
@@ -22,6 +23,7 @@ const App = () => {
           <Route path="/skills" element={<SkillsPage />} />
           <Route path="/projects" element={<ProjectPage />} />
           <Route path="/contact" element={<ContactPage />} />
+          <Route path="/myjourney" element={<ExperiencePage />} />
 
           {/* Admin Panel Routes */}
       

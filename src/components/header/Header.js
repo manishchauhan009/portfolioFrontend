@@ -33,6 +33,7 @@ const HeaderPage = () => {
           <nav className="hidden lg:flex gap-10">
             <Link to="/" className="text-lg font-medium hover:text-black">Home</Link>
             <Link to="/about" className="text-lg font-medium hover:text-black">About</Link>
+            <Link to="/myjourney" className="text-lg font-medium hover:text-black">My Journey</Link>
             <Link to="/skills" className="text-lg font-medium hover:text-black">Skills</Link>
             <Link to="/projects" className="text-lg font-medium hover:text-black">Projects</Link>
             <Link to="/contact" className="text-lg font-medium hover:text-black">Contact</Link>
@@ -49,6 +50,7 @@ const HeaderPage = () => {
           <nav className="mt-10 flex flex-col space-y-6">
             <Link to="/" className="text-lg font-medium text-white hover:text-gray-300">Home</Link>
             <Link to="/about" className="text-lg font-medium text-white hover:text-gray-300">About</Link>
+            <Link to="/myjourney" className="text-lg font-medium text-white hover:text-gray-300">My Journey</Link>
             <Link to="/skills" className="text-lg font-medium text-white hover:text-gray-300">Skills</Link>
             <Link to="/projects" className="text-lg font-medium text-white hover:text-gray-300">Projects</Link>
             <Link to="/contact" className="text-lg font-medium text-white hover:text-gray-300">Contact</Link>
