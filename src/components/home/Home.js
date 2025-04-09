@@ -214,7 +214,7 @@ function Home() {
         <img
           src="./images/profile.png"
           alt="Manish Chauhan"
-          className="rounded-3xl object-cover md:mb-3 w-[80%] sm:w-[60%] md:w-[50%] lg:w-[18rem] xl:w-[22rem] border-4 border-yellow-400 shadow-lg transition-transform duration-300 hover:scale-105"
+          className="rounded-3xl object-cover md:mb-3 w-[80%] sm:w-[60%] md:w-[50%] lg:w-[18rem] xl:w-[22rem] border-4 border-yellow-400 shadow-lg transition-transform duration-300 hover:scale-105 m-4"
         />
       </div>
     </section>

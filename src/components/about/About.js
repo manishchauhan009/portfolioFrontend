@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 const About = () => {
   return (
     <section
-      className="about flex flex-col-reverse md:flex-row items-center justify-between bg-[#121212] min-h-screen pt-24 px-6 sm:px-12 lg:px-24"
+      className="about flex flex-col-reverse md:flex-row items-center justify-between bg-[#121212] min-h-screen pt-24 px-6 sm:px-12 lg:px-24 pb-5"
       id="about"
     >
       {/* About Content */}
@@ -51,7 +51,7 @@ const About = () => {
           loading="lazy"
           alt="Chauhan Manish - MERN Developer"
           title="Chauhan Manish - MERN Developer"
-          className="max-h-[50vh] w-auto rounded-2xl shadow-xl object-cover transition-transform duration-500 hover:scale-105"
+          className="max-h-[50vh] w-auto rounded-2xl shadow-xl object-cover transition-transform duration-500 hover:scale-105 m-3"
         />
       </motion.div>
     </section>
