@@ -6,6 +6,7 @@
     "@cloudinary/react": "^1.14.1",
     "@cloudinary/url-gen": "^1.21.0",
     "@emailjs/browser": "^4.4.1",
+    "@tailwindcss/line-clamp": "^0.4.4",
     "axios": "^1.8.4",
     "cra-template": "1.2.0",
     "framer-motion": "^12.5.0",

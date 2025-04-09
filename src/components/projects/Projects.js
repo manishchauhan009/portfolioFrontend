@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { FiArrowUpRight } from "react-icons/fi";
 
 const Portfolio = () => {
-  
+
   const [projects, setProjects] = useState([]);
 
   useEffect(() => {
@@ -75,16 +75,15 @@ const Portfolio = () => {
                 loading="lazy"
                 className="w-full h-full object-cover transform group-hover:scale-105 transition-all duration-500"
               />
-              {/* Subtle Dark Overlay */}
               <div className="absolute inset-0 bg-black bg-opacity-30 group-hover:bg-opacity-50 transition-all duration-500"></div>
             </div>
 
             {/* Project Details */}
             <div className="absolute inset-0 flex flex-col justify-center items-center text-center p-6 transition-all duration-500 bg-black bg-opacity-60 group-hover:bg-opacity-80">
-              <h4 className="text-lg sm:text-xl font-bold text-white drop-shadow-md">
+              <h4 className="text-lg sm:text-xl font-bold text-white drop-shadow-md line-clamp-1">
                 {project.title}
               </h4>
-              <p className="text-sm sm:text-base text-gray-300 mb-4">
+              <p className="text-sm sm:text-base text-gray-300 mb-4 line-clamp-3">
                 {project.description}
               </p>
               <a
@@ -99,6 +98,8 @@ const Portfolio = () => {
             </div>
           </div>
         ))}
+
+
       </div>
     </section>
   );

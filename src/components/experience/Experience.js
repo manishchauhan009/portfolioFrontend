@@ -48,50 +48,69 @@ const Experience = () => {
   return (
     <section
       id="experience"
-      className="bg-[#0e0e0e] text-white min-h-screen py-20 px-6 sm:px-12 lg:px-24"
+      className="bg-[#0e0e0e] text-white py-20 px-4 sm:px-12 lg:px-24"
     >
       <motion.h2
         initial={{ opacity: 0, y: -30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
-        className="text-4xl sm:text-5xl font-extrabold text-center mb-16"
+        className="text-4xl sm:text-5xl font-extrabold text-center mb-20"
       >
         My <span className="text-yellow-400">Journey</span>
       </motion.h2>
 
-      <div className="relative pl-8 before:absolute before:top-0 before:left-6 before:bottom-0 before:w-1 before:bg-gradient-to-b from-yellow-400 to-transparent before:animate-pulse">
-        {roadmapItems.map((item, index) => (
-          <motion.div
-            key={index}
-            initial={{ opacity: 0, y: 60 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: index * 0.15 }}
-            viewport={{ once: true }}
-            className="relative mb-12"
-          >
-            {/* Icon */}
-            <div className="absolute left-[-6px] top-2 bg-yellow-500 rounded-full p-3 shadow-md animate-pulse z-10">
-              {item.type === "experience" ? (
-                <FaBriefcase className="text-white text-sm sm:text-base" />
-              ) : (
-                <FaGraduationCap className="text-white text-sm sm:text-base" />
-              )}
-            </div>
+      <div className="relative">
+        <div className="hidden sm:block absolute w-1 bg-yellow-500 left-1/2 top-0 bottom-0 transform -translate-x-1/2 opacity-20"></div>
 
-            {/* Card */}
-            <div className="ml-10 bg-[#1b1b1b] hover:bg-[#262626] border border-yellow-900/40 p-6 rounded-xl shadow-lg backdrop-blur-md transition-all duration-300">
-              <h3 className="text-xl sm:text-2xl font-semibold mb-1 text-yellow-400">
-                {item.title}
-              </h3>
-              <p className="text-sm text-gray-400 mb-3 italic">{item.duration}</p>
-              <ul className="list-disc pl-5 text-gray-300 space-y-1 text-sm sm:text-base">
-                {item.description.map((point, i) => (
-                  <li key={i}>{point}</li>
-                ))}
-              </ul>
-            </div>
-          </motion.div>
-        ))}
+        {roadmapItems.map((item, index) => {
+          const isLeft = index % 2 === 0;
+          return (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 60 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: index * 0.15 }}
+              viewport={{ once: true }}
+              className={`mb-16 flex flex-col sm:flex-row items-center ${
+                isLeft ? "sm:justify-start" : "sm:justify-end"
+              }`}
+            >
+              <div
+                className={`w-full sm:w-1/2 px-4 sm:px-8 ${
+                  isLeft ? "sm:pr-16" : "sm:pl-16"
+                }`}
+              >
+                <div className="bg-gradient-to-br from-[#1b1b1b] to-[#252525] p-6 rounded-2xl border border-yellow-900/30 shadow-[0_0_20px_-4px_rgba(234,179,8,0.3)] hover:shadow-yellow-500/20 transition-shadow duration-300 group">
+                  <div className="flex items-center gap-3 mb-2">
+                    <div className="bg-yellow-500 p-3 rounded-full shadow-lg group-hover:scale-110 transition-transform duration-300">
+                      {item.type === "experience" ? (
+                        <FaBriefcase className="text-white text-lg" />
+                      ) : (
+                        <FaGraduationCap className="text-white text-lg" />
+                      )}
+                    </div>
+                    <h3 className="text-xl sm:text-2xl font-semibold text-yellow-400">
+                      {item.title}
+                    </h3>
+                  </div>
+                  <p className="text-sm text-gray-400 mb-3 italic">
+                    {item.duration}
+                  </p>
+                  <ul className="list-disc pl-5 text-gray-300 space-y-1 text-sm sm:text-base">
+                    {item.description.map((point, i) => (
+                      <li key={i}>{point}</li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+
+              {/* Timeline node */}
+              <div className="hidden sm:flex flex-col items-center justify-center px-4">
+                <div className="w-5 h-5 bg-yellow-500 rounded-full border-4 border-[#0e0e0e] shadow-lg animate-pulse"></div>
+              </div>
+            </motion.div>
+          );
+        })}
       </div>
     </section>
   );
