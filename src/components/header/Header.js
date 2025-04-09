@@ -40,8 +40,9 @@ const HeaderPage = () => {
       <header className="fixed top-0 left-0 w-full h-[80px] bg-yellow-500/70 backdrop-blur-sm text-white z-50 shadow-xl flex items-center">
         <div className="flex justify-between items-center w-full px-6 sm:px-10">
           <Link to="/" className="text-2xl font-extrabold tracking-wide text-white hover:text-yellow-900 transition">
-            Portfolio
+            <img src="/images/logo.png" alt="Manish Chauhan Logo" className="h-36 w-auto" />
           </Link>
+
 
           <div
             className="lg:hidden cursor-pointer text-white hover:text-yellow-900 transition"
