@@ -35,7 +35,7 @@ const About = () => {
         {/* CTA Button */}
         <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
           <Link
-            to="/project"
+            to="/projects"
             className="inline-block px-8 py-3 bg-yellow-500 text-white text-lg font-bold rounded-lg shadow-md hover:bg-yellow-600 transition-all duration-300"
           >
             Explore My Work
