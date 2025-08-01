@@ -4,6 +4,7 @@ import axios from "axios";
 const AddProject = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  const [category, setCategory] = useState(""); // NEW
   const [image, setImage] = useState(null);
   const [link, setLink] = useState("");
   const [loading, setLoading] = useState(false);
@@ -42,11 +43,12 @@ const AddProject = () => {
           return;
         }
       }
-
+      const formattedCategory = category.toLowerCase().replace(" ", "-");
       const backendURL = process.env.REACT_APP_BACKEND_URL;
       const response = await axios.post(`${backendURL}/api/projects/add`, {
         title,
         description,
+        category: formattedCategory,
         image: imageUrl,
         link,
       });
@@ -56,6 +58,7 @@ const AddProject = () => {
         setTitle("");
         setDescription("");
         setImage(null);
+        setCategory(""); // NEW
         setLink("");
       }
     } catch (error) {
@@ -88,6 +91,17 @@ const AddProject = () => {
           rows="3"
           required
         />
+        <select
+          value={category}
+          onChange={(e) => setCategory(e.target.value)}
+          className="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-400"
+          required
+        >
+          <option value="">Select Category</option>
+          <option value="Web">Web</option>
+          {/* <option value="AI">AI</option> */}
+          <option value="Data Science">Data Science</option>
+        </select>
         <input
           type="file"
           accept="image/*"
@@ -103,7 +117,6 @@ const AddProject = () => {
           className="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-400"
           required
         />
-
         <button
           type="submit"
           className="w-full bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition"
