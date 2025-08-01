@@ -42,8 +42,6 @@ const HeaderPage = () => {
           <Link to="/" className="text-2xl font-extrabold tracking-wide text-white hover:text-yellow-900 transition">
             <img src="/images/logo.png" alt="Manish Chauhan Logo" className="h-36 w-auto" />
           </Link>
-
-
           <div
             className="lg:hidden cursor-pointer text-white hover:text-yellow-900 transition"
             onClick={() => setMenuOpen((prev) => !prev)}

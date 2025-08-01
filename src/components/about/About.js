@@ -19,13 +19,17 @@ const About = () => {
           About <span className="text-yellow-400">Me</span>
         </h2>
         <h3 className="text-lg sm:text-xl md:text-2xl font-semibold mb-4 text-gray-300">
-          MERN Stack Developer & AI Enthusiast
+          MERN Stack Developer & AI | Data Science Enthusiast
         </h3>
-        <p className="text-base md:text-lg text-gray-400 mb-6 leading-relaxed">
+        <p className="text-base md:text-lg text-gray-400 mb-4 leading-relaxed">
           I am a Computer Science student passionate about building innovative
-          solutions using the MERN stack and AI. My focus is on solving
-          real-world problems through technology and continuously upgrading my
-          skills.
+          solutions using the MERN stack and AI. I enjoy developing scalable web
+          applications and exploring intelligent systems that make an impact.
+        </p>
+        <p className="text-base md:text-lg text-gray-400 mb-6 leading-relaxed">
+          I also actively explore the field of Data Science — working with Python,
+          Pandas, NumPy, Scikit‑Learn, Matplotlib, and Seaborn. I love uncovering insights
+          from data and building ML models to solve real-world problems with a data-driven approach.
         </p>
 
         {/* CTA Button */}
@@ -49,8 +53,8 @@ const About = () => {
         <img
           src="/images/profile.png"
           loading="lazy"
-          alt="Chauhan Manish - MERN Developer"
-          title="Chauhan Manish - MERN Developer"
+          alt="Chauhan Manish - MERN & Data Science Developer"
+          title="Chauhan Manish - MERN & Data Science Developer"
           className="max-h-[50vh] w-auto rounded-2xl shadow-xl object-cover transition-transform duration-500 hover:scale-105 m-3"
         />
       </motion.div>
