@@ -63,6 +63,7 @@ const AddProject = () => {
       }
     } catch (error) {
       setMessage("❌ Error adding project. Please try again.");
+      console.log(error)
     } finally {
       setLoading(false);
     }
