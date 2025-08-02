@@ -4,7 +4,7 @@ import axios from "axios";
 const AddProject = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [category, setCategory] = useState(""); // NEW
+  const [category, setCategory] = useState("");
   const [image, setImage] = useState(null);
   const [link, setLink] = useState("");
   const [loading, setLoading] = useState(false);
@@ -58,7 +58,7 @@ const AddProject = () => {
         setTitle("");
         setDescription("");
         setImage(null);
-        setCategory(""); // NEW
+        setCategory("");
         setLink("");
       }
     } catch (error) {
@@ -99,9 +99,9 @@ const AddProject = () => {
           required
         >
           <option value="">Select Category</option>
-          <option value="Web">Web</option>
+          <option value="web">Web</option>
           {/* <option value="AI">AI</option> */}
-          <option value="Data Science">Data Science</option>
+          <option value="data science">Data Science</option>
         </select>
         <input
           type="file"
