@@ -43,7 +43,7 @@ const AddProject = () => {
           return;
         }
       }
-      const formattedCategory = category.toLowerCase().replace(" ", "-");
+      const formattedCategory = category.toLowerCase();
       const backendURL = process.env.REACT_APP_BACKEND_URL;
       const response = await axios.post(`${backendURL}/api/projects/add`, {
         title,

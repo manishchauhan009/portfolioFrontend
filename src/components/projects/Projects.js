@@ -16,7 +16,7 @@ const Portfolio = () => {
         console.log(data)
 
         setWebProjects(data.filter((p) => p.category === "web"));
-        setDataScienceProjects(data.filter((p) => p.category === "data-science"));
+        setDataScienceProjects(data.filter((p) => p.category === "data science"));
       } catch (error) {
         console.error("Error fetching projects:", error);
       } finally {
