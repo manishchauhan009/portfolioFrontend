@@ -11,6 +11,7 @@ import ExperiencePage from "./pages/ExperiencePage";
 import Admin from "./components/admin/Admin";
 import "./App.css";
 
+
 const App = () => {
   return (
     <>
@@ -18,6 +19,7 @@ const App = () => {
       <main className="mt-[80px]">
         <Routes>
           {/* Main Website Routes */}
+           
           <Route path="/" element={<HomePage />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/skills" element={<SkillsPage />} />

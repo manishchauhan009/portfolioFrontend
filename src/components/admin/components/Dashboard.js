@@ -1,10 +1,38 @@
+import { useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
 import { FaProjectDiagram, FaEnvelope } from "react-icons/fa";
+import axios from "axios";
 
 const Dashboard = () => {
-  // Static data (Replace with API calls later)
-  const totalProjects = 6;
-  const totalMessages = 15;
+  const [totalProjects, setTotalProjects] = useState(0);
+  const [totalMessages, setTotalMessages] = useState(0);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  const backendURL = process.env.REACT_APP_BACKEND_URL;
+
+  useEffect(() => {
+    const fetchStats = async () => {
+      try {
+        const [projectsRes, messagesRes] = await Promise.all([
+          axios.get(`${backendURL}/api/projects/count`),
+          axios.get(`${backendURL}/api/contacts/count`)
+        ]);
+        setTotalProjects(projectsRes.data.count || 0);
+        setTotalMessages(messagesRes.data.count || 0);
+      } catch (err) {
+        console.error("Error fetching stats:", err);
+        setError("Failed to load dashboard data.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchStats();
+  }, []);
+
+  if (loading) return <p className="text-gray-400 p-6">Loading dashboard...</p>;
+  if (error) return <p className="text-red-500 p-6">{error}</p>;
 
   return (
     <div className="admin-container min-h-screen bg-gray-900 text-white pt-8 sm:px-8 lg:px-16">
@@ -36,10 +64,10 @@ const Dashboard = () => {
         </div>
       </div>
 
-      {/* Admin Content Area - DIFFERENTIATED */}
-      <div className="admin-main bg-gray-850 p-6 rounded-xl shadow-xl border border-gray-700 w-full">
+      {/* Admin Content Area */}
+      {/* <div className="admin-main bg-gray-850 p-6 rounded-xl shadow-xl border border-gray-700 w-full">
         <Outlet />
-      </div>
+      </div> */}
     </div>
   );
 };
