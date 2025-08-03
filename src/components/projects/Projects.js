@@ -13,7 +13,6 @@ const Portfolio = () => {
       try {
         const response = await fetch(`${backendURL}/api/projects`);
         const data = await response.json();
-        console.log(data)
 
         setWebProjects(data.filter((p) => p.category === "web"));
         setDataScienceProjects(data.filter((p) => p.category === "data science"));

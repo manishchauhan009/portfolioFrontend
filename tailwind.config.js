@@ -11,6 +11,9 @@ module.exports = {
       },
       screens: {
         'min410': '410px', // Custom breakpoint
+      },
+      fontFamily: {
+        poppins: ['Poppins', 'sans-serif'],
       }
     },
   },

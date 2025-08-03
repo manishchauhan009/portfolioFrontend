@@ -12,7 +12,7 @@ const HeaderPage = () => {
     if (menuOpen) {
       setMenuOpen(false);
     }
-  }, [location.pathname]);
+  }, [location.pathname,menuOpen]);
 
   if (isAdmin) {
     return <AdminHeader />;

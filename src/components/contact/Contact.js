@@ -1,6 +1,8 @@
 import React, { useState, useRef, useCallback } from "react";
 import axios from "axios";
 import emailjs from "@emailjs/browser";
+import toast, { Toaster } from "react-hot-toast";
+import InputField from "./InputField";
 
 const Contact = () => {
   const formRef = useRef(null);
@@ -14,10 +16,9 @@ const Contact = () => {
 
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
-  const [successMessage, setSuccessMessage] = useState("");
 
   const validateForm = () => {
-    let newErrors = {};
+    const newErrors = {};
     const nameRegex = /^[a-zA-Z\s]{3,}$/;
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
     const phoneRegex = /^[6-9]\d{9}$/;
@@ -53,34 +54,39 @@ const Contact = () => {
     if (!validateForm()) return;
 
     setLoading(true);
-    setSuccessMessage("");
 
     try {
       const backendURL = process.env.REACT_APP_BACKEND_URL;
       await axios.post(`${backendURL}/api/contacts/submit`, formState);
 
-      await emailjs.sendForm(
-        "service_rtq35wk",
-        "template_0trjcqt",
+      const response = await emailjs.sendForm(
+        process.env.REACT_APP_EMAILJS_SERVICE_ID,
+        process.env.REACT_APP_EMAILJS_TEMPLATE_ID,
         formRef.current,
-        "9sy_rMmMFo0xGWDsb"
+        process.env.REACT_APP_EMAILJS_PUBLIC_KEY
       );
 
-      setLoading(false);
-      setSuccessMessage("Message sent successfully! We will get back to you soon.");
+      console.log("EmailJS response:", response);
 
-      setFormState({
-        user_name: "",
-        user_email: "",
-        user_phone: "",
-        user_subject: "",
-        message: "",
-      });
+      if (response.status === 200) {
+        toast.success("Message sent successfully! We will get back to you soon.");
+        setFormState({
+          user_name: "",
+          user_email: "",
+          user_phone: "",
+          user_subject: "",
+          message: "",
+        });
+      } else {
+        throw new Error("EmailJS failed to send");
+      }
     } catch (error) {
-      setLoading(false);
       console.error("Error sending message:", error);
-      alert("Failed to send the message. Please try again.");
+      toast.error("Failed to send the message. Please try again.");
+    } finally {
+      setLoading(false);
     }
+
   };
 
   return (
@@ -88,13 +94,15 @@ const Contact = () => {
       className="contact bg-gradient-to-b from-gray-900 to-black py-16 px-6 sm:px-12 md:px-20"
       id="contact"
     >
-      <h2 className="text-4xl sm:text-5xl font-bold text-center text-white mb-10">
+      <Toaster position="top-center" reverseOrder={false} />
+
+      <h2
+        className="text-4xl sm:text-5xl font-bold text-center text-white mb-10"
+        aria-label="Contact Me"
+      >
         Contact <span className="text-yellow-400 drop-shadow-lg">Me!</span>
       </h2>
 
-      {successMessage && (
-        <p className="text-green-500 text-center mb-4">{successMessage}</p>
-      )}
 
       <form
         ref={formRef}
@@ -143,11 +151,10 @@ const Contact = () => {
             value={formState.message}
             onChange={handleInputChange}
             required
-            className={`w-full mt-6 p-3 rounded-lg bg-gray-700 text-white placeholder-gray-400 outline-none focus:ring-2 ${
-              errors.message
-                ? "border-red-500 ring-red-500"
-                : "focus:ring-yellow-500"
-            }`}
+            className={`w-full mt-6 p-3 rounded-lg bg-gray-700 text-white placeholder-gray-400 outline-none focus:ring-2 ${errors.message
+              ? "border-red-500 ring-red-500"
+              : "focus:ring-yellow-500"
+              }`}
           />
           {errors.message && (
             <p className="text-red-400 text-xs mt-1">{errors.message}</p>
@@ -156,11 +163,10 @@ const Contact = () => {
 
         <button
           type="submit"
-          className={`w-full mt-6 bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-3 rounded-lg transition-all duration-300 ${
-            loading
-              ? "opacity-70 cursor-not-allowed"
-              : "hover:shadow-lg hover:shadow-yellow-400 transform hover:scale-105"
-          }`}
+          className={`w-full mt-6 bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-3 rounded-lg transition-all duration-300 ${loading
+            ? "opacity-70 cursor-not-allowed"
+            : "hover:shadow-lg hover:shadow-yellow-400 transform hover:scale-105"
+            }`}
           disabled={loading}
         >
           {loading ? "Sending..." : "Send Message"}
@@ -169,23 +175,5 @@ const Contact = () => {
     </section>
   );
 };
-
-const InputField = ({ name, label, value, onChange, error }) => (
-  <div>
-    <input
-      type="text"
-      name={name}
-      placeholder={label}
-      value={value}
-      onChange={onChange}
-      required
-      className={`p-3 rounded-lg bg-gray-700 text-white w-full placeholder-gray-400 outline-none focus:ring-2 ${
-        error ? "border-red-500 ring-red-500" : "focus:ring-yellow-500"
-      }`}
-      aria-label={label}
-    />
-    {error && <p className="text-red-400 text-xs mt-1">{error}</p>}
-  </div>
-);
 
 export default Contact;

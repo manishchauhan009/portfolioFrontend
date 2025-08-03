@@ -1,62 +1,64 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { toast } from "react-hot-toast";
 
 const EditProject = () => {
-  const { id } = useParams(); // Get project ID from URL
+  const { id } = useParams();
   const navigate = useNavigate();
 
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [image, setImage] = useState("");
   const [link, setLink] = useState("");
+  const [category, setCategory] = useState("");
+
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // Fetch project details when component mounts
+  // Fetch existing project
   useEffect(() => {
     const backendURL = process.env.REACT_APP_BACKEND_URL;
     const fetchProject = async () => {
       try {
-        const response = await axios.get(`${backendURL}/api/projects/${id}`);
-        setTitle(response.data.title);
-        setDescription(response.data.description);
-        setImage(response.data.image);
-        setLink(response.data.link);
+        const res = await axios.get(`${backendURL}/api/projects/${id}`);
+        const data = res.data;
+        setTitle(data.title);
+        setDescription(data.description);
+        setImage(data.image);
+        setLink(data.link);
+        setCategory(data.category || "");
       } catch (err) {
+        console.error("Failed to fetch project:", err);
         setError("Failed to load project details.");
       } finally {
         setLoading(false);
       }
     };
-
     fetchProject();
   }, [id]);
 
-  // Update project on form submission
   const updateProject = async (e) => {
     e.preventDefault();
     const backendURL = process.env.REACT_APP_BACKEND_URL;
     try {
-      await axios.put(`${backendURL}/api/projects/update/${id}`, {
+      await axios.post(`${backendURL}/api/projects/update/${id}`, {
         title,
         description,
         image,
         link,
+        category,
       });
-      alert("Project updated successfully!");
+      toast.success("✅ Project updated successfully!");
       navigate("/admin/projects");
     } catch (err) {
-      alert("Failed to update project. Please try again.");
+      console.error("Error updating project:", err);
+      toast.error("❌ Failed to update project.");
     }
   };
 
-  if (loading) {
-    return <p className="text-gray-600 p-6">Loading project details...</p>;
-  }
-  if (error) {
-    return <p className="text-red-500 p-6">{error}</p>;
-  }
+  if (loading) return <p className="text-gray-600 p-6">Loading project...</p>;
+  if (error) return <p className="text-red-500 p-6">{error}</p>;
 
   return (
     <div className="p-6 mt-20 max-w-3xl mx-auto">
@@ -75,8 +77,8 @@ const EditProject = () => {
           onChange={(e) => setDescription(e.target.value)}
           placeholder="Project Description"
           required
-          className="w-full p-3 border rounded focus:outline-none focus:ring-2 focus:ring-blue-400"
           rows="4"
+          className="w-full p-3 border rounded focus:outline-none focus:ring-2 focus:ring-blue-400"
         />
         <input
           type="text"
@@ -94,6 +96,17 @@ const EditProject = () => {
           required
           className="w-full p-3 border rounded focus:outline-none focus:ring-2 focus:ring-blue-400"
         />
+        <select
+          value={category}
+          onChange={(e) => setCategory(e.target.value)}
+          required
+          className="w-full p-3 border rounded focus:outline-none focus:ring-2 focus:ring-blue-400"
+        >
+          <option value="">Select Category</option>
+          <option value="web">Web</option>
+          <option value="data science">Data Science</option>
+        </select>
+
         <button
           type="submit"
           className="w-full bg-blue-500 text-white px-4 py-3 rounded-lg hover:bg-blue-600 transition-colors"

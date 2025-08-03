@@ -1,4 +1,3 @@
-import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import {
   FaTachometerAlt,
@@ -6,7 +5,6 @@ import {
   FaPlus,
   FaEnvelope,
   FaSignOutAlt,
-  FaTimes,
 } from "react-icons/fa";
 
 const Sidebar = ({ toggleSidebar }) => {
@@ -22,10 +20,7 @@ const Sidebar = ({ toggleSidebar }) => {
       {/* Sidebar Header with Close Button for mobile */}
       <div className="flex items-center justify-between p-6 text-xl font-semibold border-b border-gray-700 bg-gray-800 ">
         <span>Admin Panel</span>
-        {/* Close button appears only on mobile */}
-        {/* <button className="lg:hidden" onClick={toggleSidebar}>
-          <FaTimes size={24} />
-        </button> */}
+    
       </div>
 
       {/* Navigation Links */}

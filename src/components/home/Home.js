@@ -35,7 +35,13 @@ function Home() {
         <h1 className="text-5xl sm:text-6xl font-extrabold mb-4 tracking-tight leading-tight drop-shadow-[0_2px_2px_rgba(0,0,0,0.5)]">
           Chauhan <span className="text-yellow-500">Manish</span>
         </h1>
-        <h2 className="multiple-text text-2xl sm:text-3xl font-bold text-yellow-400 inline-block mb-6 animate-fadeIn" />
+        <h2
+          className="multiple-text text-2xl sm:text-3xl font-bold text-yellow-400 inline-block mb-6 animate-fadeIn"
+          aria-label="MERN Stack Developer"
+        >
+          MERN Stack Developer
+        </h2>
+
         <p className="text-base sm:text-lg text-gray-300 mb-8 leading-relaxed">
           I'm passionate about building scalable web applications with the MERN stack,
           and I dive deep into data science to uncover insights and build intelligent systems.
