@@ -21,7 +21,7 @@ const EditProject = () => {
     const backendURL = process.env.REACT_APP_BACKEND_URL;
     const fetchProject = async () => {
       try {
-        const res = await axios.get(`${backendURL}/api/projects/${id}`);
+        const res = await axios.get(`${backendURL}/api/projects/update/${id}`);
         const data = res.data;
         setTitle(data.title);
         setDescription(data.description);
