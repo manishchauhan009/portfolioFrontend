@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { Outlet } from "react-router-dom";
 import { FaProjectDiagram, FaEnvelope } from "react-icons/fa";
 import axios from "axios";
 
@@ -29,42 +28,42 @@ const Dashboard = () => {
     };
 
     fetchStats();
-  }, []);
+  }, [backendURL]);
 
-  if (loading) return <p className="text-gray-400 p-6">Loading dashboard...</p>;
-  if (error) return <p className="text-red-500 p-6">{error}</p>;
+  if (loading) return <p className="text-gray-400 p-6 text-center">Loading dashboard...</p>;
+  if (error) return <p className="text-red-500 p-6 text-center">{error}</p>;
 
   return (
-    <div className="admin-container min-h-screen bg-gray-900 text-white pt-8 sm:px-8 lg:px-16">
+    <div className="admin-container min-h-screen bg-gray-900 text-white pt-8 px-4 sm:px-6 lg:px-16">
       {/* Header */}
-      <header className="admin-header flex justify-center sm:justify-between items-center mb-6 px-4">
-        <h2 className="text-2xl sm:text-3xl font-bold w-full text-center sm:text-left">
+      <header className="admin-header flex flex-col sm:flex-row justify-between items-center mb-8 gap-4">
+        <h2 className="text-2xl sm:text-3xl font-bold text-center sm:text-left">
           Admin Dashboard
         </h2>
       </header>
 
       {/* Stats Cards */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-10 w-full">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
         {/* Total Projects */}
-        <div className="bg-gray-800 p-5 sm:p-6 rounded-xl shadow-lg flex items-center gap-4 w-full transition-transform transform hover:scale-105">
-          <FaProjectDiagram className="text-yellow-400 text-3xl sm:text-4xl" />
-          <div>
-            <h3 className="text-lg sm:text-xl font-semibold">Total Projects</h3>
-            <p className="text-2xl sm:text-3xl font-bold">{totalProjects}</p>
+        <div className="bg-gray-800 p-5 rounded-xl shadow-lg flex items-center gap-4 transition-transform hover:scale-[1.03]">
+          <FaProjectDiagram className="text-yellow-400 text-3xl sm:text-4xl flex-shrink-0" />
+          <div className="flex flex-col">
+            <h3 className="text-base sm:text-lg font-medium">Total Projects</h3>
+            <p className="text-xl sm:text-2xl font-bold">{totalProjects}</p>
           </div>
         </div>
 
         {/* Total Messages */}
-        <div className="bg-gray-800 p-5 sm:p-6 rounded-xl shadow-lg flex items-center gap-4 w-full transition-transform transform hover:scale-105">
-          <FaEnvelope className="text-yellow-400 text-3xl sm:text-4xl" />
-          <div>
-            <h3 className="text-lg sm:text-xl font-semibold">Total Messages</h3>
-            <p className="text-2xl sm:text-3xl font-bold">{totalMessages}</p>
+        <div className="bg-gray-800 p-5 rounded-xl shadow-lg flex items-center gap-4 transition-transform hover:scale-[1.03]">
+          <FaEnvelope className="text-yellow-400 text-3xl sm:text-4xl flex-shrink-0" />
+          <div className="flex flex-col">
+            <h3 className="text-base sm:text-lg font-medium">Total Messages</h3>
+            <p className="text-xl sm:text-2xl font-bold">{totalMessages}</p>
           </div>
         </div>
       </div>
 
-      {/* Admin Content Area */}
+      {/* Placeholder for additional content */}
       {/* <div className="admin-main bg-gray-850 p-6 rounded-xl shadow-xl border border-gray-700 w-full">
         <Outlet />
       </div> */}
