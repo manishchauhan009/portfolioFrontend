@@ -7,70 +7,101 @@ import {
   SiMongodb, SiTailwindcss, SiNumpy, SiPandas, SiScikitlearn,
   SiTensorflow, SiJupyter, SiAnaconda
 } from "react-icons/si";
+import Tilt from "react-parallax-tilt";
+import Theme from "../styles/Theme";  // import theme
+
+const { colors } = Theme;
 
 const webSkills = [
-  { name: "HTML5", icon: <FaHtml5 className="text-orange-500" /> },
-  { name: "CSS3", icon: <FaCss3Alt className="text-blue-500" /> },
-  { name: "JavaScript", icon: <FaJs className="text-yellow-400" /> },
-  { name: "React.js", icon: <FaReact className="text-blue-400" /> },
-  { name: "Node.js", icon: <FaNodeJs className="text-green-500" /> },
-  { name: "MongoDB", icon: <SiMongodb className="text-green-600" /> },
-  { name: "Tailwind CSS", icon: <SiTailwindcss className="text-cyan-400" /> },
-  { name: "Git & GitHub", icon: <FaGitAlt className="text-red-500" /> },
-  { name: "Database Management", icon: <FaDatabase className="text-yellow-500" /> },
-  { name: "Java", icon: <FaJava className="text-red-400" /> },
+  { name: "HTML5", icon: <FaHtml5 style={{ color: colors.accent }} /> },
+  { name: "CSS3", icon: <FaCss3Alt style={{ color: colors.primary }} /> },
+  { name: "JavaScript", icon: <FaJs style={{ color: colors.secondary }} /> },
+  { name: "React.js", icon: <FaReact style={{ color: colors.primary }} /> },
+  { name: "Node.js", icon: <FaNodeJs style={{ color: colors.accent }} /> },
+  { name: "MongoDB", icon: <SiMongodb style={{ color: colors.secondary }} /> },
+  { name: "Tailwind CSS", icon: <SiTailwindcss style={{ color: colors.primary }} /> },
+  { name: "Git & GitHub", icon: <FaGitAlt style={{ color: colors.accent }} /> },
+  { name: "Database Management", icon: <FaDatabase style={{ color: colors.secondary }} /> },
+  { name: "Java", icon: <FaJava style={{ color: colors.accent }} /> },
 ];
 
 const dataScienceSkills = [
-  { name: "Python", icon: <FaPython className="text-blue-300" /> },
-  { name: "NumPy", icon: <SiNumpy className="text-purple-400" /> },
-  { name: "Pandas", icon: <SiPandas className="text-indigo-300" /> },
-  { name: "Scikit‑Learn", icon: <SiScikitlearn className="text-yellow-300" /> },
-  { name: "TensorFlow", icon: <SiTensorflow className="text-orange-400" /> },
-  { name: "Jupyter Notebook", icon: <SiJupyter className="text-orange-500" /> },
-  { name: "Anaconda", icon: <SiAnaconda className="text-green-400" /> },
-  { name: "Seaborn", icon: <FaChartLine className="text-cyan-300" /> }, // Seaborn placeholder
+  { name: "Python", icon: <FaPython style={{ color: colors.primary }} /> },
+  { name: "NumPy", icon: <SiNumpy style={{ color: colors.secondary }} /> },
+  { name: "Pandas", icon: <SiPandas style={{ color: colors.primary }} /> },
+  { name: "Scikit-Learn", icon: <SiScikitlearn style={{ color: colors.secondary }} /> },
+  { name: "TensorFlow", icon: <SiTensorflow style={{ color: colors.accent }} /> },
+  { name: "Jupyter Notebook", icon: <SiJupyter style={{ color: colors.accent }} /> },
+  { name: "Anaconda", icon: <SiAnaconda style={{ color: colors.primary }} /> },
+  { name: "Seaborn", icon: <FaChartLine style={{ color: colors.secondary }} /> },
 ];
 
 const Skills = () => {
   return (
     <section
-      className="skills bg-gradient-to-b from-black to-gray-900 py-16 px-6 sm:px-12 md:px-20"
+      className="skills py-16 px-6 sm:px-12 md:px-20"
       id="skills"
+      style={{ background: `linear-gradient(to bottom, ${colors.base}, ${colors.surface})` }}
     >
-      <h2 className="text-4xl sm:text-5xl font-bold text-center text-white mb-12">
-        My <span className="text-yellow-400 drop-shadow-lg">Skills</span>
+      <h2 className="text-4xl sm:text-5xl font-bold text-center mb-12" style={{ color: colors.text }}>
+        My <span style={{ color: colors.accent }}>Skills</span>
       </h2>
 
       {/* Web Skills */}
-      <h3 className="text-2xl sm:text-3xl font-semibold text-white mb-6 text-center">
+      <h3 className="text-2xl sm:text-3xl font-semibold mb-6 text-center" style={{ color: colors.text }}>
         Web Development & Programming Skills
       </h3>
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-8 max-w-5xl mx-auto mb-12">
         {webSkills.map((skill, index) => (
-          <div
+          <Tilt
             key={index}
-            className="flex flex-col items-center p-6 bg-gray-800 bg-opacity-50 rounded-xl shadow-lg border border-gray-700 hover:shadow-2xl transition-all duration-500"
+            glareEnable
+            glareMaxOpacity={0.45}
+            scale={1.05}
+            tiltMaxAngleX={15}
+            tiltMaxAngleY={15}
+            className="rounded-xl"
           >
-            <div className="text-4xl sm:text-5xl mb-3">{skill.icon}</div>
-            <p className="text-white text-sm sm:text-base font-semibold">{skill.name}</p>
-          </div>
+            <div
+              className="flex flex-col items-center p-6 rounded-xl shadow-lg border transition-all duration-500"
+              style={{
+                background: `${colors.surface}aa`,
+                borderColor: colors.border,
+              }}
+            >
+              <div className="text-4xl sm:text-5xl mb-3">{skill.icon}</div>
+              <p style={{ color: colors.text }} className="text-sm sm:text-base font-semibold">{skill.name}</p>
+            </div>
+          </Tilt>
         ))}
       </div>
 
       {/* Data Science Skills */}
-      <h3 className="text-2xl sm:text-3xl font-semibold text-white mb-6 text-center">
+      <h3 className="text-2xl sm:text-3xl font-semibold mb-6 text-center" style={{ color: colors.text }}>
         Data Science
       </h3>
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-8 max-w-5xl mx-auto">
         {dataScienceSkills.map((skill, index) => (
-          <div
+          <Tilt
             key={index}
-            className="flex flex-col items-center p-6 bg-gray-800 bg-opacity-50 rounded-xl shadow-lg border border-gray-700 hover:shadow-2xl transition-all duration-500"
+            glareEnable
+            glareMaxOpacity={0.45}
+            scale={1.05}
+            tiltMaxAngleX={15}
+            tiltMaxAngleY={15}
+            className="rounded-xl"
           >
-            <div className="text-4xl sm:text-5xl mb-3">{skill.icon}</div>
-            <p className="text-white text-sm sm:text-base font-semibold">{skill.name}</p>
-          </div>
+            <div
+              className="flex flex-col items-center p-6 rounded-xl shadow-lg border transition-all duration-500"
+              style={{
+                background: `${colors.surface}aa`,
+                borderColor: colors.border,
+              }}
+            >
+              <div className="text-4xl sm:text-5xl mb-3">{skill.icon}</div>
+              <p style={{ color: colors.text }} className="text-sm sm:text-base font-semibold">{skill.name}</p>
+            </div>
+          </Tilt>
         ))}
       </div>
     </section>

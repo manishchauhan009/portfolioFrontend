@@ -3,6 +3,10 @@ import axios from "axios";
 import emailjs from "@emailjs/browser";
 import toast, { Toaster } from "react-hot-toast";
 import InputField from "./InputField";
+import { motion } from "framer-motion";
+import Theme from "../styles/Theme";
+
+const { colors } = Theme;
 
 const Contact = () => {
   const formRef = useRef(null);
@@ -17,6 +21,7 @@ const Contact = () => {
   const [errors, setErrors] = useState({});
   const [loading, setLoading] = useState(false);
 
+  // Validation
   const validateForm = () => {
     const newErrors = {};
     const nameRegex = /^[a-zA-Z\s]{3,}$/;
@@ -43,12 +48,14 @@ const Contact = () => {
     return Object.keys(newErrors).length === 0;
   };
 
+  // Input handler
   const handleInputChange = useCallback((e) => {
     const { name, value } = e.target;
     setFormState((prev) => ({ ...prev, [name]: value }));
     setErrors((prev) => ({ ...prev, [name]: "" }));
   }, []);
 
+  // Submit
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!validateForm()) return;
@@ -65,8 +72,6 @@ const Contact = () => {
         formRef.current,
         process.env.REACT_APP_EMAILJS_PUBLIC_KEY
       );
-
-      console.log("EmailJS response:", response);
 
       if (response.status === 200) {
         toast.success("Message sent successfully! We will get back to you soon.");
@@ -86,31 +91,50 @@ const Contact = () => {
     } finally {
       setLoading(false);
     }
-
   };
 
   return (
     <section
-      className="contact bg-gradient-to-b from-gray-900 to-black py-16 px-6 sm:px-12 md:px-20"
+      className="contact py-16 px-6 sm:px-12 md:px-20"
       id="contact"
+      style={{
+        background: `linear-gradient(to bottom, ${colors.base}, ${colors.surface})`,
+      }}
     >
       <Toaster position="top-center" reverseOrder={false} />
 
-      <h2
-        className="text-4xl sm:text-5xl font-bold text-center text-white mb-10"
-        aria-label="Contact Me"
+      {/* Heading */}
+      <motion.h2
+        initial={{ opacity: 0, y: -30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+        className="text-4xl sm:text-5xl font-bold text-center mb-10"
+        style={{ color: colors.text }}
       >
-        Contact <span className="text-yellow-400 drop-shadow-lg">Me!</span>
-      </h2>
+        Contact <span style={{ color: colors.accent}}>Me!</span>
+      </motion.h2>
 
-
-      <form
+      {/* Form */}
+      <motion.form
         ref={formRef}
         onSubmit={handleSubmit}
         autoComplete="off"
-        className="max-w-2xl w-full mx-auto bg-gray-800 bg-opacity-50 p-8 rounded-xl shadow-lg backdrop-blur-md border border-gray-700"
+        initial={{ opacity: 0, y: 50, scale: 0.95 }}
+        animate={{ opacity: 1, y: 0, scale: 1 }}
+        transition={{ duration: 0.9, ease: "easeOut" }}
+        className="max-w-2xl w-full mx-auto p-8 rounded-xl shadow-lg backdrop-blur-md border"
+        style={{
+          backgroundColor: colors.surface,
+          borderColor: colors.border,
+        }}
       >
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-4">
+        {/* Name + Email */}
+        <motion.div
+          initial={{ opacity: 0, x: -40 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8 }}
+          className="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-4"
+        >
           <InputField
             name="user_name"
             label="Full Name"
@@ -125,9 +149,15 @@ const Contact = () => {
             onChange={handleInputChange}
             error={errors.user_email}
           />
-        </div>
+        </motion.div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-6">
+        {/* Phone + Subject */}
+        <motion.div
+          initial={{ opacity: 0, x: 40 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          className="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-6"
+        >
           <InputField
             name="user_phone"
             label="Mobile Number"
@@ -142,36 +172,53 @@ const Contact = () => {
             onChange={handleInputChange}
             error={errors.user_subject}
           />
-        </div>
+        </motion.div>
 
-        <div>
+        {/* Message */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.8, delay: 0.4 }}
+        >
           <textarea
             name="message"
             placeholder="Your Message"
             value={formState.message}
             onChange={handleInputChange}
             required
-            className={`w-full mt-6 p-3 rounded-lg bg-gray-700 text-white placeholder-gray-400 outline-none focus:ring-2 ${errors.message
-              ? "border-red-500 ring-red-500"
-              : "focus:ring-yellow-500"
-              }`}
+            className={`w-full mt-6 p-3 rounded-lg text-white placeholder-gray-400 outline-none focus:ring-2 ${
+              errors.message
+                ? "border-red-500 ring-red-500"
+                : `focus:ring-[${colors.accent}]`
+            }`}
+            style={{ backgroundColor: colors.base, borderColor: colors.border }}
           />
           {errors.message && (
             <p className="text-red-400 text-xs mt-1">{errors.message}</p>
           )}
-        </div>
+        </motion.div>
 
-        <button
+        {/* Submit Button with 3D Hover */}
+        <motion.button
           type="submit"
-          className={`w-full mt-6 bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-3 rounded-lg transition-all duration-300 ${loading
-            ? "opacity-70 cursor-not-allowed"
-            : "hover:shadow-lg hover:shadow-yellow-400 transform hover:scale-105"
-            }`}
+          whileHover={{ scale: 1.05, rotateX: 5 }}
+          whileTap={{ scale: 0.95, rotateX: -5 }}
+          transition={{ type: "spring", stiffness: 300 }}
+          className={`w-full mt-6 font-bold py-3 rounded-lg transition-all duration-300 ${
+            loading
+              ? "opacity-70 cursor-not-allowed"
+              : "hover:shadow-lg"
+          }`}
+          style={{
+            backgroundColor: colors.accent,
+            color: colors.text,
+            boxShadow: loading ? "none" : `0 0 20px ${colors.accent}33`,
+          }}
           disabled={loading}
         >
           {loading ? "Sending..." : "Send Message"}
-        </button>
-      </form>
+        </motion.button>
+      </motion.form>
     </section>
   );
 };

@@ -1,6 +1,8 @@
-import React from "react";
 import { motion } from "framer-motion";
 import { FaGraduationCap, FaBriefcase } from "react-icons/fa";
+import Theme from "../styles/Theme";
+
+const { colors } = Theme;
 
 const roadmapItems = [
   {
@@ -48,7 +50,11 @@ const Experience = () => {
   return (
     <section
       id="experience"
-      className="bg-[#0e0e0e] text-white py-20 px-4 sm:px-12 lg:px-24"
+      className="py-20 px-4 sm:px-12 lg:px-24"
+      style={{
+        background: colors.base,
+        color: colors.text,
+      }}
     >
       <motion.h2
         initial={{ opacity: 0, y: -30 }}
@@ -56,11 +62,15 @@ const Experience = () => {
         transition={{ duration: 0.6 }}
         className="text-4xl sm:text-5xl font-extrabold text-center mb-20"
       >
-        My <span className="text-yellow-400">Journey</span>
+        My <span style={{ color: colors.accent }}>Journey</span>
       </motion.h2>
 
       <div className="relative">
-        <div className="hidden sm:block absolute w-1 bg-yellow-500 left-1/2 top-0 bottom-0 transform -translate-x-1/2 opacity-20"></div>
+        {/* Central line */}
+        <div
+          className="hidden sm:block absolute w-1 left-1/2 top-0 bottom-0 transform -translate-x-1/2 opacity-20"
+          style={{ background: colors.accent }}
+        ></div>
 
         {roadmapItems.map((item, index) => {
           const isLeft = index % 2 === 0;
@@ -75,38 +85,72 @@ const Experience = () => {
                 isLeft ? "sm:justify-start" : "sm:justify-end"
               }`}
             >
-              <div
-                className={`w-full sm:w-1/2 px-4 sm:px-8 ${
+              {/* Card with 3D Hover Effect */}
+              <motion.div
+                whileHover={{ rotateY: isLeft ? -8 : 8, rotateX: 4, scale: 1.05 }}
+                transition={{ type: "spring", stiffness: 200, damping: 15 }}
+                className={`w-full sm:w-1/2 px-4 sm:px-8 perspective-1000 ${
                   isLeft ? "sm:pr-16" : "sm:pl-16"
                 }`}
               >
-                <div className="bg-gradient-to-br from-[#1b1b1b] to-[#252525] p-6 rounded-2xl border border-yellow-900/30 shadow-[0_0_20px_-4px_rgba(234,179,8,0.3)] hover:shadow-yellow-500/20 transition-shadow duration-300 group">
+                <div
+                  className="p-6 rounded-2xl border transition-shadow duration-300 group"
+                  style={{
+                    background: `linear-gradient(135deg, ${colors.surface}, ${colors.base})`,
+                    borderColor: colors.accent + "50",
+                    boxShadow: `0 10px 30px ${colors.accent}25`,
+                  }}
+                >
                   <div className="flex items-center gap-3 mb-2">
-                    <div className="bg-yellow-500 p-3 rounded-full shadow-lg group-hover:scale-110 transition-transform duration-300">
+                    <motion.div
+                      whileHover={{ rotate: 15, scale: 1.2 }}
+                      className="p-3 rounded-full shadow-lg"
+                      style={{ background: colors.accent }}
+                    >
                       {item.type === "experience" ? (
                         <FaBriefcase className="text-white text-lg" />
                       ) : (
                         <FaGraduationCap className="text-white text-lg" />
                       )}
-                    </div>
-                    <h3 className="text-xl sm:text-2xl font-semibold text-yellow-400">
+                    </motion.div>
+                    <h3
+                      className="text-xl sm:text-2xl font-semibold"
+                      style={{ color: colors.accent }}
+                    >
                       {item.title}
                     </h3>
                   </div>
-                  <p className="text-sm text-gray-400 mb-3 italic">
+                  <p className="text-sm mb-3 italic" style={{ color: colors.subtle }}>
                     {item.duration}
                   </p>
-                  <ul className="list-disc pl-5 text-gray-300 space-y-1 text-sm sm:text-base">
+                  <ul className="list-disc pl-5 space-y-1 text-sm sm:text-base">
                     {item.description.map((point, i) => (
-                      <li key={i}>{point}</li>
+                      <li key={i} style={{ color: colors.text }}>
+                        {point}
+                      </li>
                     ))}
                   </ul>
                 </div>
-              </div>
+              </motion.div>
 
-              {/* Timeline node */}
+              {/* Timeline node with Glow */}
               <div className="hidden sm:flex flex-col items-center justify-center px-4">
-                <div className="w-5 h-5 bg-yellow-500 rounded-full border-4 border-[#0e0e0e] shadow-lg animate-pulse"></div>
+                <motion.div
+                  animate={{
+                    scale: [1, 1.3, 1],
+                    boxShadow: [
+                      `0 0 10px ${colors.accent}`,
+                      `0 0 20px ${colors.accent}`,
+                      `0 0 10px ${colors.accent}`,
+                    ],
+                  }}
+                  transition={{ duration: 2, repeat: Infinity }}
+                  className="w-6 h-6 rounded-full border-4"
+                  style={{
+                    background: colors.accent,
+                    borderColor: colors.base,
+                  }}
+                ></motion.div>
               </div>
             </motion.div>
           );
