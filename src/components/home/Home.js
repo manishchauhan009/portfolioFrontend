@@ -49,8 +49,7 @@ export default function Home() {
     setSpot({ x: (e.clientX / innerWidth) * 100, y: (e.clientY / innerHeight) * 100 });
   };
 
-  const colors = Theme.colors; // ✅ use Theme directly
-  console.log(colors)
+  const colors = Theme.colors;
 
   return (
     <section
