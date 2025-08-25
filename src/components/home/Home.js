@@ -179,7 +179,7 @@ export default function Home() {
               </a>
             </Tilt>
             <a
-              href="#projects"
+              href="projects"
               className="inline-flex items-center gap-2 rounded-2xl border border-white/10 bg-white/5 px-6 py-3 font-semibold text-gray-200 backdrop-blur transition hover:border-white/20 hover:bg-white/10"
             >
               Explore Work
