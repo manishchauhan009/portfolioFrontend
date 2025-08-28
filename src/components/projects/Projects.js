@@ -42,7 +42,7 @@ const Portfolio = () => {
         {/* Image */}
         <div className="relative w-full h-56 sm:h-64 overflow-hidden rounded-t-xl">
           <img
-            src={project.image}
+            src={project.image.url}
             alt={project.title}
             loading="lazy"
             className="w-full h-full object-cover transform group-hover:scale-110 transition-all duration-700"
