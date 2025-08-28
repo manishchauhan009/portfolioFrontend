@@ -7,6 +7,9 @@ import EditProject from "./components/EditProject";
 import Contacts from "./components/Contacts";
 import Login from "./components/Login";
 import ProtectedRoute from "./components/ProtectedRoute";
+import BlogAdd from "./components/BlogAdd";
+import Blogs from "./components/Blogs";
+import EditBlog from "./components/EditBlog";
 
 const Admin = () => {
   return (
@@ -22,6 +25,9 @@ const Admin = () => {
           <Route path="add-project" element={<AddProject />} />
           <Route path="edit-project/:id" element={<EditProject />} />
           <Route path="contacts" element={<Contacts />} />
+          <Route path="add-blog" element={<BlogAdd />} />
+          <Route path="blogs" element={<Blogs />} />
+          <Route path="edit-blog/:id" element={<EditBlog />} />
         </Route>
       </Route>
     </Routes>

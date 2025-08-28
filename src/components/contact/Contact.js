@@ -74,7 +74,7 @@ const Contact = () => {
       );
 
       if (response.status === 200) {
-        toast.success("Message sent successfully! We will get back to you soon.");
+        toast.success("✅ Message sent successfully! We will get back to you soon.");
         setFormState({
           user_name: "",
           user_email: "",
@@ -87,7 +87,7 @@ const Contact = () => {
       }
     } catch (error) {
       console.error("Error sending message:", error);
-      toast.error("Failed to send the message. Please try again.");
+      toast.error("❌ Failed to send the message. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -101,7 +101,17 @@ const Contact = () => {
         background: `linear-gradient(to bottom, ${colors.base}, ${colors.surface})`,
       }}
     >
-      <Toaster position="top-center" reverseOrder={false} />
+      <Toaster
+        position="top-center"
+        reverseOrder={false}
+        toastOptions={{
+          style: {
+            background: colors.surface,
+            color: colors.text,
+            border: `1px solid ${colors.border}`,
+          },
+        }}
+      />
 
       {/* Heading */}
       <motion.h2
@@ -111,7 +121,7 @@ const Contact = () => {
         className="text-4xl sm:text-5xl font-bold text-center mb-10"
         style={{ color: colors.text }}
       >
-        Contact <span style={{ color: colors.accent}}>Me!</span>
+        Contact <span style={{ color: colors.accent }}>Me!</span>
       </motion.h2>
 
       {/* Form */}
@@ -186,12 +196,14 @@ const Contact = () => {
             value={formState.message}
             onChange={handleInputChange}
             required
-            className={`w-full mt-6 p-3 rounded-lg text-white placeholder-gray-400 outline-none focus:ring-2 ${
-              errors.message
-                ? "border-red-500 ring-red-500"
-                : `focus:ring-[${colors.accent}]`
-            }`}
-            style={{ backgroundColor: colors.base, borderColor: colors.border }}
+            className="w-full mt-6 p-3 rounded-lg text-white placeholder-gray-400 outline-none focus:ring-2"
+            style={{
+              backgroundColor: colors.base,
+              borderColor: errors.message ? "red" : colors.border,
+              boxShadow: errors.message
+                ? "0 0 6px red"
+                : `0 0 0 2px transparent`,
+            }}
           />
           {errors.message && (
             <p className="text-red-400 text-xs mt-1">{errors.message}</p>
@@ -205,14 +217,12 @@ const Contact = () => {
           whileTap={{ scale: 0.95, rotateX: -5 }}
           transition={{ type: "spring", stiffness: 300 }}
           className={`w-full mt-6 font-bold py-3 rounded-lg transition-all duration-300 ${
-            loading
-              ? "opacity-70 cursor-not-allowed"
-              : "hover:shadow-lg"
+            loading ? "opacity-70 cursor-not-allowed" : "hover:shadow-lg"
           }`}
           style={{
             backgroundColor: colors.accent,
-            color: colors.text,
-            boxShadow: loading ? "none" : `0 0 20px ${colors.accent}33`,
+            color: "#fff", // better contrast
+            boxShadow: loading ? "none" : `0 0 20px ${colors.accent}55`,
           }}
           disabled={loading}
         >

@@ -1,4 +1,3 @@
-// src/styles/Theme.js
 const Theme = {
   colors: {
     base: "#0b0f1a",      // dark bg
