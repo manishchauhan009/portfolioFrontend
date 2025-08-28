@@ -86,13 +86,15 @@ const Blogs = () => {
               }}
             >
               {/* Blog Image (if available) */}
-              {blog.image && (
+              {/* Blog Image (if available) */}
+              {blog.image?.url && (
                 <img
-                  src={blog.image}
+                  src={blog.image.url}
                   alt={blog.title}
                   className="w-full h-40 object-cover rounded mb-4"
                 />
               )}
+
 
               {/* Blog Details */}
               <div className="flex-1">

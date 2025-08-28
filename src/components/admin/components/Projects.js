@@ -88,7 +88,7 @@ const Projects = () => {
               {/* Project Image (if available) */}
               {project.image && (
                 <img
-                  src={project.image}
+                  src={project.image.url}
                   alt={project.title}
                   className="w-full h-40 object-cover rounded mb-4"
                 />

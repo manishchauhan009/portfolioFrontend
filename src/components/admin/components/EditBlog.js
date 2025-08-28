@@ -50,7 +50,6 @@ const EditBlog = () => {
     }
   };
 
-  // Upload image to Cloudinary
   const uploadImage = async (file) => {
     const data = new FormData();
     data.append("file", file);
@@ -62,44 +61,43 @@ const EditBlog = () => {
         `https://api.cloudinary.com/v1_1/${process.env.REACT_APP_CLOUDINARY_CLOUD_NAME}/image/upload`,
         data
       );
-      return res.data.secure_url;
+      return { url: res.data.secure_url, public_id: res.data.public_id };
     } catch (err) {
       console.error("Image upload failed:", err);
       return null;
     }
   };
 
-  // Delete old image from Cloudinary (optional)
-  const deleteOldImage = async (publicId) => {
+
+  const deleteOldImage = async (public_id) => {
     try {
-      await axios.post(`${backendURL}/api/blogs/delete-image`, { publicId });
+      await axios.post(`${backendURL}/api/blogs/delete-image`, { public_id });
     } catch (err) {
       console.error("Failed to delete old image:", err);
     }
   };
 
-  // Update blog
+
   const updateBlog = async (e) => {
     e.preventDefault();
     setLoading(true);
 
     try {
-      let imageUrl = image;
+      let newImageObj = image; // already { url, public_id }
 
       // Upload new image if selected
       if (newImageFile) {
-        const uploadedUrl = await uploadImage(newImageFile);
-        if (!uploadedUrl) {
+        const uploaded = await uploadImage(newImageFile);
+        if (!uploaded) {
           toast.error("❌ Image upload failed.");
           setLoading(false);
           return;
         }
-        imageUrl = uploadedUrl;
+        newImageObj = uploaded;
 
-        // Optionally delete old image
-        if (image) {
-          const publicId = image.split("/").pop().split(".")[0]; // crude way
-          await deleteOldImage(publicId);
+        // Delete old image if exists
+        if (image?.public_id) {
+          await deleteOldImage(image.public_id);
         }
       }
 
@@ -107,7 +105,7 @@ const EditBlog = () => {
         title,
         description,
         content,
-        image: imageUrl,
+        image: newImageObj,
       });
 
       toast.success("✅ Blog updated successfully!");
@@ -119,6 +117,7 @@ const EditBlog = () => {
       setLoading(false);
     }
   };
+
 
   if (loading) return <p className="text-gray-400 p-6">Loading blog...</p>;
   if (error) return <p className="text-red-400 p-6">{error}</p>;

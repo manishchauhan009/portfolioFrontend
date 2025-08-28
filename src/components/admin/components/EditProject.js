@@ -57,14 +57,13 @@ const EditProject = () => {
 
 
 
- const updateProject = async (e) => {
+const updateProject = async (e) => {
   e.preventDefault();
   setLoading(true);
 
   try {
     let updatedImage = existingImage;
 
-    // If uploading a new image
     if (image) {
       const uploaded = await uploadImage(image);
       if (!uploaded) {
@@ -81,7 +80,7 @@ const EditProject = () => {
       description,
       link,
       category,
-      image: updatedImage,
+      image: updatedImage || null, // ✅ always send object or null
     });
 
     toast.success("✅ Project updated successfully!");
