@@ -7,12 +7,29 @@ import { loadSlim } from "tsparticles-slim";
 import { motion, useReducedMotion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import Theme from "../styles/Theme";
+import axios from "axios";
 
 export default function Home() {
   const typedRef = useRef(null);
   const typedElRef = useRef(null);
   const shouldReduceMotion = useReducedMotion();
   const [mounted, setMounted] = useState(false);
+
+  const [resumeLink, setResumeLink] = useState(null);
+
+  useEffect(() => {
+    const backendURL = process.env.REACT_APP_BACKEND_URL;
+    const fetchResume = async () => {
+      try {
+        const res = await axios.get(`${backendURL}/api/resume`);
+        setResumeLink(res.data.data?.link);
+      } catch (err) {
+        console.error("Error fetching resume:", err);
+      }
+    };
+
+    fetchResume();
+  }, []);
 
   useEffect(() => setMounted(true), []);
 
@@ -154,7 +171,7 @@ export default function Home() {
           </p>
 
           {/* Socials */}
-          <div className="mt-8 flex items-center justify-center gap-4 lg:justify-start">
+          <div className="mt-8 flex items-center justify-center gap-4 lg:justify-start mb-5">
             <SocialIcon href="https://github.com/manishchauhan009" label="GitHub">
               <FaGithub className="text-2xl" />
             </SocialIcon>
@@ -167,24 +184,27 @@ export default function Home() {
           </div>
 
           {/* CTA */}
-          <div className="mt-10 flex flex-wrap items-center gap-4">
-            <Tilt glareEnable glareMaxOpacity={0.35} scale={1.04} transitionSpeed={1600} gyroscope>
+          <Tilt glareEnable glareMaxOpacity={0.35} scale={1.04} transitionSpeed={1600} gyroscope>
+            {resumeLink ? (
               <a
-                href="https://drive.google.com/file/d/1LH0-JD5hI3NGBg70KVNDHyXUm1zSuUtx/view?usp=sharing"
+                href={resumeLink}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group inline-flex items-center gap-2 rounded-2xl border border-cyan-300/30 bg-gradient-to-r from-cyan-400/20 to-indigo-400/10 px-6 py-3 font-semibold text-cyan-200 shadow-[0_0_40px_-12px_rgba(34,211,238,0.45)] backdrop-blur transition hover:from-cyan-400/30 hover:to-indigo-400/20"
               >
                 View Resume <ArrowRight className="transition group-hover:translate-x-0.5" size={18} />
               </a>
-            </Tilt>
-            <a
-              href="projects"
-              className="inline-flex items-center gap-2 rounded-2xl border border-white/10 bg-white/5 px-6 py-3 font-semibold text-gray-200 backdrop-blur transition hover:border-white/20 hover:bg-white/10"
-            >
-              Explore Work
-            </a>
-          </div>
+            ) : (
+              <button
+                disabled
+                className="inline-flex items-center gap-2 rounded-2xl border border-cyan-300/20 bg-gray-700/30 px-6 py-3 font-semibold text-gray-400 cursor-not-allowed"
+              >
+                Loading Resume...
+              </button>
+            )}
+          </Tilt>
+
+
         </motion.div>
 
         {/* Right Profile */}

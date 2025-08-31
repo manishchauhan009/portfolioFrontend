@@ -10,6 +10,7 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import BlogAdd from "./components/BlogAdd";
 import Blogs from "./components/Blogs";
 import EditBlog from "./components/EditBlog";
+import Resume from "./components/Resume";
 
 const Admin = () => {
   return (
@@ -27,6 +28,7 @@ const Admin = () => {
           <Route path="contacts" element={<Contacts />} />
           <Route path="add-blog" element={<BlogAdd />} />
           <Route path="blogs" element={<Blogs />} />
+          <Route path="resume" element={<Resume />} />
           <Route path="edit-blog/:id" element={<EditBlog />} />
         </Route>
       </Route>

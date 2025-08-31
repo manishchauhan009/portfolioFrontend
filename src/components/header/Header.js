@@ -29,6 +29,7 @@ const HeaderPage = () => {
     { to: "/myjourney", label: "My Journey" },
     { to: "/skills", label: "Skills" },
     { to: "/projects", label: "Projects" },
+    { to: "/blogs", label: "Blogs" },
     { to: "/contact", label: "Contact" },
   ];
 
