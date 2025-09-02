@@ -60,7 +60,7 @@ const BlogDetails = () => {
     if (!newComment.trim()) return;
 
     try {
-      const res = await axios.post(`${backendURL}/api/blogs/${id}/comment`, {
+      const res = await axios.post(`${backendURL}/api/blogs/${id}/comments`, {
         text: newComment,
         author: "Anonymous",
       });

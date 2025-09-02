@@ -15,8 +15,8 @@ const Blogs = () => {
     const fetchBlogs = async () => {
       try {
         const response = await axios.get(`${backendURL}/api/blogs`);
-        console.log("Respoonse is ",response)
-        console.log("Blog Response ",response.data.blogs)
+        // console.log("Respoonse is ",response)
+        // console.log("Blog Response ",response.data.blogs)
         setBlogs(response.data.blogs);
        
       } catch (err) {
@@ -138,7 +138,7 @@ const Blogs = () => {
                     <p><strong>Tags:</strong> {blog.tags.join(", ")}</p>
                   )}
                   <p><strong>Views:</strong> {blog.views || 0}</p>
-                  <p><strong>Likes:</strong> {blog.likes || 0}</p>
+                  <p><strong>Likes:</strong> {blog.likes?.length || 0}</p>
                   <p><strong>Comments:</strong> {blog.comments?.length || 0}</p>
                 </div>
               </div>
