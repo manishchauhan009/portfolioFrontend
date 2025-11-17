@@ -3,34 +3,34 @@
 
   <!-- Home Page -->
   <url>
-    <loc>https://manishchauhan009.vercel.app/</loc>
+    <loc>https://manishchauhan.online/</loc>
     <lastmod>2025-09-05</lastmod>
     <priority>1.0</priority>
   </url>
 
   <!-- About Page -->
   <url>
-    <loc>https://manishchauhan009.vercel.app/about</loc>
+    <loc>https://manishchauhan.online/about</loc>
     <lastmod>2025-09-05</lastmod>
     <priority>0.7</priority>
   </url>
 
   <!-- Projects Page -->
   <url>
-    <loc>https://manishchauhan009.vercel.app/projects</loc>
+    <loc>https://manishchauhan.online/projects</loc>
     <lastmod>2025-09-05</lastmod>
     <priority>0.9</priority>
   </url>
 
   <!-- Contact Page -->
   <url>
-    <loc>https://manishchauhan009.vercel.app/contact</loc>
+    <loc>https://manishchauhan.online/contact</loc>
     <lastmod>2025-09-05</lastmod>
     <priority>0.6</priority>
   </url>
   <!-- Blog Page -->
   <url>
-    <loc>https://manishchauhan009.vercel.app/blogs</loc>
+    <loc>https://manishchauhan.online/blogs</loc>
     <lastmod>2025-09-05</lastmod>
     <priority>0.8</priority>
   </url>
